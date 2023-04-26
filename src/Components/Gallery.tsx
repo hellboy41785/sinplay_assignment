@@ -30,10 +30,10 @@ const Gallery: React.FC<IGalleryProps> = ({ gallery }) => {
           No Result...{" "}
         </h1>
       ) : (
-        <div className="grid items-center justify-center max-w-3xl grid-cols-2 gap-3 lg:grid-cols-3">
+        <div className="grid items-center justify-center w-full grid-cols-2 gap-3 lg:max-w-3xl lg:grid-cols-3">
           {galleryItem.map((el, i) => (
             <div
-             className="cursor-pointer "
+             className="w-full cursor-pointer"
               key={i}
               onDragStart={(e) => dragItem.current = i}
               onDragEnter={(e) => dragOverItem.current = i}
@@ -45,7 +45,7 @@ const Gallery: React.FC<IGalleryProps> = ({ gallery }) => {
                 className="w-full cursor-pointer "
               >
                 <Image
-                  className="w-full object-cover min-h-[100px] max-h-[100px] lg:min-h-[250px] lg:max-h-[250px] rounded"
+                  className="w-full object-cover min-h-[200px] max-h-[200px] lg:min-h-[250px] lg:max-h-[250px] rounded"
                   src={el.thumbnail}
                   width={100}
                   height={100}

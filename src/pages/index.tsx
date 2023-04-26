@@ -1,27 +1,28 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import Gallery from "@/Components/Gallery";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Search from "@/Components/Search";
-import { useGalleryQuery } from "@/hooks/useGalleryQuery";
-import Loader from "@/Loader/Loader";
-import Error from "@/Error/Error";
+import { useGalleryStore } from "@/store/useStore";
 
+import dynamic from 'next/dynamic'
+
+const Gallery = dynamic(() => import('@/Components/Gallery'), {
+  ssr:false
+})
 
 export default function Home() {
   const [page, setPage] = useState(1);
-  const [search, setSearch] = useState('')
+  const gallery = useGalleryStore((state) => state.gallery);
+  const [search, setSearch] = useState("");
   const router = useRouter();
-  const {data,isLoading,isError} = useGalleryQuery()
-  
+
   useEffect(() => {
     router.push(`?page=${page}`);
   }, [page]);
 
-  if(isLoading) return <Loader/>
-  if(isError) return <Error/>
 
-  const filterGallery = data.slice((page * 6) - 6,page * 6).filter((el) => {
+
+  const filterGallery = gallery.slice(page * 6 - 6, page * 6).filter((el) => {
     const words = search?.trim().split(/\s+/) || [];
     return words.every((word) =>
       el.title.toLowerCase().includes(word.toLowerCase())
@@ -30,7 +31,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col items-center justify-center gap-10 px-3 py-6 mt-6">
-      <Search setSearch={setSearch} id={data.length}/>
+      <Search setSearch={setSearch} id={gallery.length} />
       <Gallery gallery={filterGallery} />
 
       {/* Pagination */}

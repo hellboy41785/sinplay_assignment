@@ -1,4 +1,5 @@
-import { useAddItemQuery } from "@/hooks/useGalleryQuery";
+
+import { useGalleryStore } from "@/store/useStore";
 import React, { useState } from "react";
 
 interface ISearchProp {
@@ -7,26 +8,32 @@ interface ISearchProp {
 }
 
 const Search: React.FC<ISearchProp> = ({ setSearch, id }) => {
-  const generateGuid=()=> {
-    return Math.random().toString(36).substring(2, 15) +
-        Math.random().toString(36).substring(2, 15);
-    }
+  const generateGuid = () => {
+    return (
+      Math.random().toString(36).substring(2, 15) +
+      Math.random().toString(36).substring(2, 15)
+    );
+  };
   const [submit, setSubmit] = useState({
     id: "",
     title: "",
     description: "",
     thumbnail: "",
   });
-  const { mutate } = useAddItemQuery();
 
 
   const handleSubmit = () => {
-    mutate({
-      id: generateGuid(),
-      title: submit.title,
-      description: submit.description,
-      thumbnail: submit.thumbnail,
-    });
+    useGalleryStore.setState((state) => ({
+      gallery: [
+        {
+          id: generateGuid(),
+          title: submit.title,
+          description: submit.description,
+          thumbnail: submit.thumbnail,
+        },
+        ...state.gallery,
+      ],
+    }));
     setSubmit({
       id: "",
       title: "",
