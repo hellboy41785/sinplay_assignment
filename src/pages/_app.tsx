@@ -16,8 +16,8 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>Home</title>
-        <meta name="Home" content="Home" />
+        <title>Sinplay</title>
+        <meta name="Sinplay" content="assignment" />
         <link
           rel="icon"
           type="text/html"
