@@ -20,9 +20,10 @@ export default function Home() {
     router.push(`?page=${page}`);
   }, [page]);
 
+  
+  const filterBy = search.length === 0 ? gallery.slice(page * 6 - 6, page * 6) : gallery
 
-
-  const filterGallery = gallery.slice(page * 6 - 6, page * 6).filter((el) => {
+  const filterGallery = filterBy.filter((el) => {
     const words = search?.trim().split(/\s+/) || [];
     return words.every((word) =>
       el.title.toLowerCase().includes(word.toLowerCase())
@@ -31,7 +32,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col items-center justify-center gap-10 px-3 py-6 mt-6">
-      <Search setSearch={setSearch} id={gallery.length} />
+      <Search setSearch={setSearch} />
       <Gallery gallery={filterGallery} />
 
       {/* Pagination */}

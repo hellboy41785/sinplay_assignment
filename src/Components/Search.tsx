@@ -4,10 +4,9 @@ import React, { useState } from "react";
 
 interface ISearchProp {
   setSearch: React.Dispatch<React.SetStateAction<string>>;
-  id: number;
 }
 
-const Search: React.FC<ISearchProp> = ({ setSearch, id }) => {
+const Search: React.FC<ISearchProp> = ({ setSearch }) => {
   const generateGuid = () => {
     return (
       Math.random().toString(36).substring(2, 15) +

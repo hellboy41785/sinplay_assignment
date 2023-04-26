@@ -4,6 +4,7 @@ import { IGallery } from "../../types/gallery";
 
 interface IGalleryProps {
   gallery: IGallery[];
+
 }
 
 const Gallery: React.FC<IGalleryProps> = ({ gallery }) => {
