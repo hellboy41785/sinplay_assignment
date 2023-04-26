@@ -1,12 +1,12 @@
 import { useQuery, useMutation, useQueryClient,UseQueryResult } from "@tanstack/react-query";
 import axios from "axios";
-import { IProducts } from "../../types/products";
+import { IGallery } from "../../types/gallery";
 
 const fetchGallery = async () => {
     const res = axios.get(`/api/post`)
     return (await res).data
 }
-const addItem = async ({ id,title,description,thumbnail, }: IProducts) => {
+const addItem = async ({ id,title,description,thumbnail, }: IGallery) => {
     await axios.post(`/api/post`, {
         id,
         title,
@@ -15,7 +15,7 @@ const addItem = async ({ id,title,description,thumbnail, }: IProducts) => {
     });
 }
 
-export const useGalleryQuery = (): UseQueryResult<IProducts[]> => {
+export const useGalleryQuery = (): UseQueryResult<IGallery[]> => {
     return useQuery({
         queryKey: ['gallery'],
         queryFn: () => fetchGallery(),

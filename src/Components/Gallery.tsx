@@ -1,14 +1,14 @@
 import React, { useRef,useState,useEffect } from "react";
 import Image from "next/image";
-import { IProducts } from "../../types/products";
+import { IGallery } from "../../types/gallery";
 
 interface IGalleryProps {
-  gallery: IProducts[];
+  gallery: IGallery[];
 }
 
-const Products: React.FC<IGalleryProps> = ({ gallery }) => {
+const Gallery: React.FC<IGalleryProps> = ({ gallery }) => {
   const [galleryItem, setGalleryItem] = useState(gallery)
-
+  
   useEffect(()=>{
     setGalleryItem(gallery)
   },[gallery])
@@ -88,4 +88,4 @@ const Products: React.FC<IGalleryProps> = ({ gallery }) => {
   );
 };
 
-export default Products;
+export default Gallery;

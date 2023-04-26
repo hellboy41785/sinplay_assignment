@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import Products from "@/Components/Products";
+import Gallery from "@/Components/Gallery";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Search from "@/Components/Search";
@@ -21,7 +21,7 @@ export default function Home() {
   if(isLoading) return <Loader/>
   if(isError) return <Error/>
 
-  const filterProducts = data.slice((page * 6) - 6,page * 6).filter((el) => {
+  const filterGallery = data.slice((page * 6) - 6,page * 6).filter((el) => {
     const words = search?.trim().split(/\s+/) || [];
     return words.every((word) =>
       el.title.toLowerCase().includes(word.toLowerCase())
@@ -31,7 +31,7 @@ export default function Home() {
   return (
     <div className="flex flex-col items-center justify-center gap-10 px-3 py-6 mt-6">
       <Search setSearch={setSearch} id={data.length}/>
-      <Products gallery={filterProducts} />
+      <Gallery gallery={filterGallery} />
 
       {/* Pagination */}
       <div className="fixed btn-group bottom-2">
@@ -46,7 +46,7 @@ export default function Home() {
         <button
           className="btn"
           onClick={() => setPage((prev) => prev + 1)}
-          disabled={filterProducts.length !== 6 && true}
+          disabled={filterGallery.length !== 6 && true}
         >
           »
         </button>

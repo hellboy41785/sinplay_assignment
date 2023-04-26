@@ -1,4 +1,4 @@
-export interface IProducts {
+export interface IGallery {
     id: number | string;
     title:string;
     brand?:string;

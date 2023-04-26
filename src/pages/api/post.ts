@@ -1,6 +1,6 @@
 import { getLocalData, updateLocalData } from '@/utils/localdata'
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { IProducts } from '../../../types/products'
+import { IGallery } from '../../../types/gallery'
 
 
 export default async function handler(
@@ -9,7 +9,7 @@ export default async function handler(
 ) {
     if (req.method === "GET") {
         try {
-            const data: IProducts[] = await getLocalData()
+            const data: IGallery[] = await getLocalData()
             res.status(200).json(data)
 
         } catch (err: unknown) {
